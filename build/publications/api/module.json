@@ -1,0 +1,130 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.justsoft.nulpschedule",
+    "module": "api",
+    "version": "1.0.5-THR",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "6.3",
+      "buildId": "dxonnx24wjheplhgcdwt3pxs5i"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.4.10"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "api-1.0.5-THR.jar",
+          "url": "api-1.0.5-THR.jar",
+          "size": 32939,
+          "sha512": "97e7efff6e5c59ecd5138adb91da696c4eb58fe53575c9fe5066cae4d94b51a4366a40dc7879446f10eb053818f66887927fab9b827c5599ac396d0f84e55a7b",
+          "sha256": "87f1bd22ee9fe9778757e3a0ee43184267e5150e0b35ffe04afd6c4df5802747",
+          "sha1": "af10bbc5a153093dda54b58ed427b17a3deed8f0",
+          "md5": "f4707a751d74e25cf8a72003765281e6"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.localToProject": "public",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jsoup",
+          "module": "jsoup",
+          "version": {
+            "requires": "1.13.1"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk8",
+          "version": {
+            "requires": "1.4.10"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "api-1.0.5-THR.jar",
+          "url": "api-1.0.5-THR.jar",
+          "size": 32939,
+          "sha512": "97e7efff6e5c59ecd5138adb91da696c4eb58fe53575c9fe5066cae4d94b51a4366a40dc7879446f10eb053818f66887927fab9b827c5599ac396d0f84e55a7b",
+          "sha256": "87f1bd22ee9fe9778757e3a0ee43184267e5150e0b35ffe04afd6c4df5802747",
+          "sha1": "af10bbc5a153093dda54b58ed427b17a3deed8f0",
+          "md5": "f4707a751d74e25cf8a72003765281e6"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "api-1.0.5-THR-javadoc.jar",
+          "url": "api-1.0.5-THR-javadoc.jar",
+          "size": 261,
+          "sha512": "5563d0d466d468c3d20c34ecd0c0f223f78e2c650eaf60a59ba9dc3440b9839a3cb77c441b844c01d0692b96b2e83491edc449b984061eb8912dee0f28917158",
+          "sha256": "49b7e42e1f1a0902ba52e8e7614a07aebfb83393627f679793f93296c0c4fc06",
+          "sha1": "0f3b4df6af7089c88a946082e385763fa09eaeaa",
+          "md5": "96898a9d2ff2a6b251161a41eaaabd79"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "api-1.0.5-THR-sources.jar",
+          "url": "api-1.0.5-THR-sources.jar",
+          "size": 6087,
+          "sha512": "0116162779b4d3be5cccbdd2dc04a94b841b5390546a81620228fd66fd33882bbd96c1b59c287f4fc86ae8f291008d7e60d1d469aa2236e531f3f087af7140f1",
+          "sha256": "51a88fe43c2691357c6d0226a60310485dd4d30dae7ab43a3566a4fcc9510896",
+          "sha1": "445cd690d6a09b893e8c2af2a8784617143be6f4",
+          "md5": "ef53e4fe327f6382d63e71a8d9d05677"
+        }
+      ]
+    }
+  ]
+}
