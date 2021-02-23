@@ -1,17 +1,13 @@
 package com.justsoft.nulpschedule.api
 
-import com.justsoft.nulpschedule.api.model.ApiSchedule
-import com.justsoft.nulpschedule.api.model.ApiScheduleClass
+import com.justsoft.nulpschedule.api.model.*
 import com.justsoft.nulpschedule.api.model.ApiScheduleClass.Companion.FLAG_DENOMINATOR
 import com.justsoft.nulpschedule.api.model.ApiScheduleClass.Companion.FLAG_NUMERATOR
 import com.justsoft.nulpschedule.api.model.ApiScheduleClass.Companion.FLAG_SUBGROUP_1
 import com.justsoft.nulpschedule.api.model.ApiScheduleClass.Companion.FLAG_SUBGROUP_2
-import com.justsoft.nulpschedule.api.model.ApiSubject
-import com.justsoft.nulpschedule.api.model.ScheduleType
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
-import java.lang.RuntimeException
 import java.time.DayOfWeek
 import java.time.DayOfWeek.*
 import java.time.LocalDateTime
@@ -57,7 +53,8 @@ class ScheduleApi constructor(
     fun getSchedule(
         institute: String = "",
         group: String,
-        scheduleType: ScheduleType = ScheduleType.STUDENT
+        scheduleType: ScheduleType = ScheduleType.STUDENT,
+        semesterDuration: SemesterDuration = SemesterDuration.WHOLE_SEMESTER,
     ): Result<ScheduleRequestResult> {
         if (institute == "All" || group == "All")
             throw IllegalArgumentException("institute or group name is \'All\'")
@@ -68,6 +65,7 @@ class ScheduleApi constructor(
                 if (scheduleType == ScheduleType.STUDENT || scheduleType == ScheduleType.STUDENT_PART_TIME)
                     argument(ARGUMENT_INSTITUTE to institute)
                 argument(ARGUMENT_GROUP to group)
+                argument(ARGUMENT_SEMESTER_DURATION to semesterDuration.argument.toString())
             }
             val doc = getDocument(url.toString())
             getScheduleFromDocument(doc, institute, group, scheduleType)
@@ -237,6 +235,7 @@ class ScheduleApi constructor(
 
         private const val ARGUMENT_INSTITUTE = "departmentparent_abbrname_selective"
         private const val ARGUMENT_GROUP = "studygroup_abbrname_selective"
+        private const val ARGUMENT_SEMESTER_DURATION = "semestrduration"
 
         private val ENDPOINT_MAP = mapOf(
             ScheduleType.STUDENT to "students_schedule",
