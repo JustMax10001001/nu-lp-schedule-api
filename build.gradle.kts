@@ -6,7 +6,7 @@ plugins {
     maven
 }
 group = "com.justsoft.nulpschedule"
-version = "1.0.5-THR"
+version = "1.0.6"
 
 repositories {
     mavenCentral()
