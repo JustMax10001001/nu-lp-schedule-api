@@ -73,7 +73,7 @@ internal class ScheduleApiTest {
 
         private val scheduleApi = getScheduleApi()
 
-        @ParameterizedTest(name = "{index}: ordinal = {0}, institute = \'{1}\'")
+        @ParameterizedTest(name = "{index}: ordinal = {0}, institute = {1}")
         @ArgumentsSource(value = GroupArgumentsProvider::class)
         fun getGroups(ordinal: Int, institute: String) {
             val groups = scheduleApi.getGroups(institute, ScheduleType.values()[ordinal])
