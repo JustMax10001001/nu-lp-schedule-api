@@ -96,8 +96,13 @@ class ScheduleApi constructor(
         )
 
         val blockSystemMain = document.getElementById("block-system-main")
-        val viewStudentsSchedule = blockSystemMain.getElementsByClass("view-students-schedule")[0]
-        val scheduleViewContent = viewStudentsSchedule.getElementsByClass("view-content")[0]
+            ?: throw ElementNotFoundException("block-system-main")
+
+        val viewStudentsSchedule = blockSystemMain.getElementsByClass("view-students-schedule").first()
+            ?: throw ElementNotFoundException("view-students-schedule")
+
+        val scheduleViewContent = viewStudentsSchedule.getElementsByClass("view-content").first()
+            ?: throw ElementNotFoundException("view-content")
 
         val subjectsMap = mutableMapOf<Long, Subject>()
         val classesList = mutableListOf<ScheduleClass>()
@@ -202,7 +207,7 @@ class ScheduleApi constructor(
     }
 
     private fun getDayOfWeekForHeader(header: String): DayOfWeek {
-        return when (header.toLowerCase(Locale.ROOT).trim()) {
+        return when (header.lowercase(Locale.ROOT).trim()) {
             "пн" -> MONDAY
             "вт" -> TUESDAY
             "ср" -> WEDNESDAY
@@ -216,6 +221,8 @@ class ScheduleApi constructor(
 
     private fun getInstitutesFromDocument(document: Document): List<String> {
         val selector = document.getElementById("edit-departmentparent-abbrname-selective")
+            ?: throw ElementNotFoundException("edit-departmentparent-abbrname-selective")
+
         return selector.children()
             .stream()
             .map { it.attr("value") }
@@ -224,6 +231,8 @@ class ScheduleApi constructor(
 
     private fun getGroupsFromDocument(document: Document): List<String> {
         val selector = document.getElementById("edit-studygroup-abbrname-selective")
+            ?: throw ElementNotFoundException("edit-studygroup-abbrname-selective")
+
         return selector.children()
             .stream()
             .map { it.attr("value") }

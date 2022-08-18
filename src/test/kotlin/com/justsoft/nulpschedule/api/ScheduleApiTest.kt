@@ -64,7 +64,7 @@ internal class ScheduleApiTest {
 
     @Test
     fun getSchedule() {
-        val scheduleRequestResult = scheduleApi.getSchedule("ІКНІ", "ПЗ-14")
+        val scheduleRequestResult = scheduleApi.getSchedule("ІКНІ", "ПЗ-33")
         assert(scheduleRequestResult.isSuccess)
         assert(scheduleRequestResult.getOrNull() != null)
     }
