@@ -144,8 +144,21 @@ class ScheduleApi constructor(
             val getNodeText: (Int) -> String =
                 { groupContentTextNodes.getOrNull(it)?.text()?.trimTrailingComma() ?: "" }
             val subjectName = getNodeText(0)
-            val teacher = getNodeText(1)
-            val classDescription = getNodeText(2)
+            var teacher = getNodeText(1)
+            var classDescription = getNodeText(2)
+
+            if (classDescription == "") {
+                val match = NAME_INITIALS.matchEntire(teacher)
+
+                if (match == null) {
+                    classDescription = teacher
+                    teacher = ""
+                } else {
+                    val nameGroup = match.groups["name"]!!
+                    classDescription = teacher.substring(nameGroup.range.last).trim()
+                    teacher = nameGroup.value
+                }
+            }
 
             val subjectId = ApiSubject.generateId(schedule, subjectName)
             val subject = subjects[subjectId] ?: createSubject(schedule, subjectName).also {
@@ -255,6 +268,7 @@ class ScheduleApi constructor(
     companion object {
         private const val ARGUMENT_GROUP = "studygroup_abbrname"
         private const val ARGUMENT_SEMESTER_DURATION = "semestrduration"
+        private val NAME_INITIALS = Regex("^(?<name>\\p{L}{2,} \\p{L}\\.( )?\\p{L}\\.),")
 
         private val ENDPOINT_MAP = mapOf(
             ScheduleType.STUDENT to "students_schedule",
