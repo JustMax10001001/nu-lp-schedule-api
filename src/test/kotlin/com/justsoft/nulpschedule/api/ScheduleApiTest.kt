@@ -1,6 +1,7 @@
 package com.justsoft.nulpschedule.api
 
 import com.justsoft.nulpschedule.api.model.ScheduleType
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtensionContext
@@ -19,7 +20,6 @@ import javax.net.ssl.*
 
 
 internal class ScheduleApiTest {
-
     private lateinit var scheduleApi: ScheduleApi
 
     @BeforeEach
@@ -28,76 +28,15 @@ internal class ScheduleApiTest {
     }
 
     @Test
-    fun getInstitutesSelective() {
-        val institutes = scheduleApi.getInstitutes(scheduleType = ScheduleType.SELECTIVE)
-        assert(institutes.isFailure)
-        assert(institutes.exceptionOrNull() is IllegalArgumentException)
-    }
-
-    @Test
-    fun getInstitutesPostgraduate() {
-        val institutes = scheduleApi.getInstitutes(scheduleType = ScheduleType.POSTGRADUATE)
-        assert(institutes.isFailure)
-        assert(institutes.exceptionOrNull() is IllegalArgumentException)
-    }
-
-    @Test
-    fun getInstitutesPostgraduatePartTime() {
-        val institutes = scheduleApi.getInstitutes(scheduleType = ScheduleType.POSTGRADUATE_PART_TIME)
-        assert(institutes.isFailure)
-        assert(institutes.exceptionOrNull() is IllegalArgumentException)
-    }
-
-    @Test
-    fun getInstitutesStudent() {
-        val institutes = scheduleApi.getInstitutes(scheduleType = ScheduleType.STUDENT)
-        assert(institutes.isSuccess)
-        assert(!institutes.getOrNull().isNullOrEmpty())
-    }
-
-    @Test
-    fun getInstitutesStudentPartTime() {
-        val institutes = scheduleApi.getInstitutes(scheduleType = ScheduleType.STUDENT_PART_TIME)
-        assert(institutes.isSuccess)
-        assert(!institutes.getOrNull().isNullOrEmpty())
-    }
-
-    @Test
     fun getSchedule() {
-        val scheduleRequestResult = scheduleApi.getSchedule("ІКНІ", "ПЗ-14")
+        val scheduleRequestResult = scheduleApi.getSchedule("ПЗ-14")
         assert(scheduleRequestResult.isSuccess)
         assert(scheduleRequestResult.getOrNull() != null)
     }
 
-    class GroupTest {
-
-        private val scheduleApi = getScheduleApi()
-
-        @ParameterizedTest(name = "{index}: ordinal = {0}, institute = {1}")
-        @ArgumentsSource(value = GroupArgumentsProvider::class)
-        fun getGroups(ordinal: Int, institute: String) {
-            val groups = scheduleApi.getGroups(institute, ScheduleType.values()[ordinal])
-            assert(groups.isSuccess)
-            assert(!groups.getOrNull().isNullOrEmpty())
-        }
-
-        class GroupArgumentsProvider : ArgumentsProvider {
-            override fun provideArguments(context: ExtensionContext?): Stream<out Arguments> {
-                return Stream.of(
-                    of(0, "ІКНІ"),
-                    of(1, ""),
-                    of(2, ""),
-                    of(3, "ІКНІ"),
-                    of(4, "")
-                )
-            }
-
-        }
-    }
-
     companion object {
         private fun getScheduleApi(): ScheduleApi {
-            return ScheduleApi(SSLSocketFactoryWithAdditionalKeyStores(loadKeystore()))
+            return ScheduleApi("https://student2023.lpnu.ua", SSLSocketFactoryWithAdditionalKeyStores(loadKeystore()))
         }
 
         private fun loadKeystore(): KeyStore {
@@ -109,8 +48,6 @@ internal class ScheduleApiTest {
             ks.setCertificateEntry("nulp", cert)
             return ks
         }
-
-
     }
 
     internal class SSLSocketFactoryWithAdditionalKeyStores(

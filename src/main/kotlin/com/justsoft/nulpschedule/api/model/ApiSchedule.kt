@@ -3,6 +3,7 @@ package com.justsoft.nulpschedule.api.model
 import java.time.LocalDateTime
 
 data class ApiSchedule(
+    @Deprecated("Institute name is not available")
     val instituteName: String,
     val groupName: String,
     val updateTime: LocalDateTime,

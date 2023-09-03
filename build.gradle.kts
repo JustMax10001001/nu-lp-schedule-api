@@ -1,9 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.30"
+    id("org.jetbrains.kotlin.jvm") version "1.9.10"
     `maven-publish`
-    maven
 }
 group = "com.justsoft.nulpschedule"
 version = "1.0.6"
@@ -13,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jsoup:jsoup:1.13.1")
+    implementation("org.jsoup:jsoup:1.16.1")
 
     testImplementation(platform("org.junit:junit-bom:5.7.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
@@ -33,11 +32,6 @@ publishing {
             from(components["java"])
         }
     }
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
-    kotlinOptions.freeCompilerArgs += "-Xallow-result-return-type"
 }
 
 tasks.withType<Test> {
