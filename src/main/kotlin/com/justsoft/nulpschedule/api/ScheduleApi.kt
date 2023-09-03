@@ -214,7 +214,7 @@ class ScheduleApi constructor(
     }
 
     private fun getDayOfWeekForHeader(header: String): DayOfWeek {
-        return when (header.lowercase(Locale.ROOT).trim()) {
+        return when (header.toLowerCase(Locale.ROOT).trim()) {
             "пн" -> MONDAY
             "вт" -> TUESDAY
             "ср" -> WEDNESDAY
