@@ -148,14 +148,14 @@ class ScheduleApi constructor(
             var classDescription = getNodeText(2)
 
             if (classDescription == "") {
-                val match = NAME_INITIALS.matchEntire(teacher)
+                val match = NAME_INITIALS.matchAt(teacher, 0)
 
                 if (match == null) {
                     classDescription = teacher
                     teacher = ""
                 } else {
                     val nameGroup = match.groups["name"]!!
-                    classDescription = teacher.substring(nameGroup.range.last).trim()
+                    classDescription = teacher.substring(match.range.last + 1).trim()
                     teacher = nameGroup.value
                 }
             }

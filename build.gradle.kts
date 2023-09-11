@@ -3,7 +3,7 @@ plugins {
     `maven-publish`
 }
 group = "com.justsoft.nulpschedule"
-version = "1.1.0"
+version = "1.1.1-02"
 
 repositories {
     mavenCentral()
